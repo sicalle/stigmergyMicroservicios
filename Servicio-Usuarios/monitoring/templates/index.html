@@ -1,0 +1,53 @@
+{% block content %}
+<h1>Hola!</h1>
+
+<h2>Dynamic content</h2>
+
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Variables:</strong> {{ variables }}</li>
+  </ul>
+
+  <ul>
+    {% for variable in variables %}
+      <li>{{ variable|safe }}</li>
+    {% endfor %}
+  </ul>
+
+
+  <div class="container text-center">
+  <form action="/event/" method="get" id="systemForm">
+  	{% csrf_token %}
+  	<div class="btn-group-vertical w-75">
+  		<button type="button" class="btn btn-primary btn-lg btn-block">Submarine</button>
+  		<button type="button" class="btn btn-primary btn-lg btn-block">Buoy</button>
+  		<button type="submit" name="system" value="sub" form="systemForm" class="btn btn-primary btn-lg btn-block">Submarine</button>
+  		<button type="submit" name="system" value="buoy" form="systemForm" class="btn btn-primary btn-lg btn-block">Buoy</button>
+  	</div>
+  </form>
+  </div>
+
+  <html>
+      <head>
+          <title>An example</title>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+          <script>
+              function call_counter(url, pk) {
+                  window.open(url);
+                  $.get('get/'+pk+'/', function (data) {
+                      alert("counter updated!");
+                  });
+              }
+          </script>
+      </head>
+      <body>
+          <button onclick="call_counter('localhost:8000/measurements/get/4/', 4);">
+              I update object 12345
+          </button>
+          <button onclick="call_counter('http://www.yahoo.com', 999);">
+              I update object 999
+          </button>
+      </body>
+  </html>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% block content %}
+
+  <div class="container text-center">
+  <form action="../../measurements/get/" method="post" id="systemForm">
+  	{% csrf_token %}
+  	<div class="btn-group-vertical w-75">
+      {% for measurement in measurements %}
+        <button type="submit" name="system" value= {{ measurement.pk|safe }} form="systemForm" class="btn btn-primary btn-lg btn-block">{{ measurement|safe }}</button>
+      {% endfor %}
+  	</div>
+  </form>
+  </div>
+
+{% endblock %}

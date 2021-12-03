@@ -1,0 +1,188 @@
+{% block content %}
+  <!DOCTYPE html>
+  <html>
+  <title>Stigmergy</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+  <link rel="icon" href="https://media-exp1.licdn.com/dms/image/C4D0BAQFnYiJueQ6QDQ/company-logo_200_200/0/1610710355097?e=2159024400&v=beta&t=wiu-N2M9KJNtVFAQVNy6ZglxoXleG57Wgj61TFnyGGI" />
+
+  <style>
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+  .w3-bar-block .w3-bar-item {padding:20px}
+      input[type=text], input[type=password] {
+      width: 100%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      }
+      button {
+      background-color: #8ebf42;
+      color: white;
+      padding: 14px 0;
+      margin: 10px 0;
+      border: none;
+      cursor: grabbing;
+      width: 100%;
+      }
+      button:hover {
+      opacity: 0.8;
+      }
+      .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+      }
+      .container {
+      padding: 16px 0;
+      text-align:left;
+      }
+      span.psw {
+      float: right;
+      padding-top: 0;
+      padding-right: 15px;
+      }
+      /* Change styles for span on extra small screens */
+      @media screen and (max-width: 300px) {
+      span.psw {
+      display: block;
+      float: none;
+      }
+    }
+
+    select {
+      display: block;
+      margin: 0 auto;
+    }
+
+  </style>
+  <body>
+
+  <!-- Sidebar (hidden by default) -->
+  <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Cerrar Menu</a>
+    <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Orden Escogida</a>
+    <form action="../../ordenes/list/" method="post" id="systemForm">
+    {% csrf_token %}
+    <div class="btn-group-vertical w-75">
+    <button class="w3-bar-item w3-button" type="submit" name="system" value= {{ orden.pk|safe }} form="systemForm" class="btn btn-primary btn-lg btn-block">Lista Ordenes</button>
+    </div>
+    </form>
+    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">Acerca de Stygmergy</a>
+  </nav>
+
+  <!-- Top menu -->
+  <div class="w3-top" style="background-color:#95D9C2;">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+      <div class="w3-button w3-padding-16 w3-left" style="background-color:#95D9C2;" onclick="w3_open()">☰</div>
+      <div class="w3-right w3-padding-16" style="background-color:#95D9C2;"><img src="https://stigmergy.com.co/images/StigmergyLogo_1.png" alt="Stygmergy" width="150"></div>
+      <div class="w3-center w3-padding-16" style="background-color:#95D9C2;">Orden Escogida - Detalle</div>
+    </div>
+  </div>
+
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+
+    <!-- First Photo Grid-->
+    <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-half">
+      <h3><b>{{ orden.nameO|safe }}</b></h3>
+      <h4>{{ orden.productosO|safe }}</h4>
+      <img src="{{ orden.urlO|safe }}" alt="Img" width="250">
+      <p>{{ orden.tipoO|safe }}</p>
+      <p>Valor de la orden: {{ orden.valueO|safe }}</p>
+      <p>Fecha creacion: {{ orden.dateTimeO|safe }}</p>
+      <br>
+      <p><b>Status: {{ orden.statusO|safe }} </b></p>
+    </div>
+    <!-- Form de cambio de status -->
+    <div class="w3-half">
+      
+      <h3>Cambio de status</h3>
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label style="padding-left: 120px" ><strong>Status actual: </strong> {{ orden.statusO|safe }}</label>
+        <br><br>
+        <form action="../../ordenes/update/" method="post" id="systemForm2">
+        {% csrf_token %}
+        <select name="status">
+          <option value="En Hub de despacho">En Hub de despacho</option>
+          <option value="Volando">Volando</option>
+          <option value="En Hub de llegada">En Hub de llegada</option>
+        </select>
+        <button type="submit" name = "pk1" value = "{{ orden.pk|safe }}" style="background-color:#FFD16C; color: black;">Actualizar</button>
+        </form>
+        <br><br><br>
+        <div class="w3-center">
+        <img src="https://stigmergy.com.co/images/DeliveryDrone.png" alt="Img" width="400">
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <hr id="about">
+
+    <!-- About Section -->
+    <div class="w3-container w3-padding-32 w3-center">
+      <h3>Acerca de Stygmergy</h3><br>
+      <img src="https://stigmergy.com.co/images/StigmergyLogo_1.png" alt="Me" class="w3-image" style="display:block;margin:auto" width="500" height="533">
+      <div class="w3-padding-32">
+        <h4><b>¿Que es Stygmergy?</b></h4>
+        <h6><i>Entregando lo que necesites a través de drones autónomos.</i></h6>
+        <p>Estamos construyendo una red logística de centros en ciudades, suburbios y áreas sin cobertura de servicios de entrega tradicionales, lo que permite que cualquier paquete llegue a donde antes era difícil llegar.</p>
+      </div>
+    </div>
+    <hr>
+
+    <!-- Footer -->
+    <footer class="w3-row-padding w3-padding-32">
+      <div class="w3-third">
+        <h3>Stigmergy</h3>
+        <p>Estamos construyendo una red logística de centros en ciudades, suburbios y áreas sin cobertura de servicios de entrega tradicionales, lo que permite que cualquier paquete llegue a donde antes era difícil llegar.</p>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      </div>
+
+      <div class="w3-third">
+        <br><br>
+        <br><br>
+        <h3>------------------------------------</h3>
+      </div>
+
+      <div class="w3-third w3-serif">
+        <h3>POPULAR TAGS</h3>
+        <p>
+          <span class="w3-tag w3-black w3-margin-bottom">Stigmergy</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Drones</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Venta</span>
+          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Comida</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Delivery</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Colombia</span>
+          <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Autonomos</span>
+        </p>
+      </div>
+    </footer>
+
+  <!-- End page content -->
+  </div>
+
+  <script>
+  // Script to open and close sidebar
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+  </script>
+
+  </body>
+  </html>
+
+{% endblock %}
