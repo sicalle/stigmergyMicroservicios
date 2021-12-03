@@ -1,0 +1,138 @@
+extends layout
+
+block content
+  // Navbar (sit on top)
+  .w3-top
+    .w3-bar.w3-white.w3-wide.w3-padding.w3-card
+      a.w3-bar-item.w3-button(href='#home')
+        img(src='https://stigmergy.com.co/images/StigmergyLogo_1.png' alt='Stygmergy' width='150')
+      // Float links to the right. Hide them on small screens
+      .w3-right.w3-hide-small
+        a.w3-bar-item.w3-button(href='#restaurantes') Restaurantes
+        a.w3-bar-item.w3-button(href='#descripcion') Descripcion
+        a.w3-bar-item.w3-button(href='#inscripcion') Inscripción
+        a.w3-bar-item.w3-button(href='#buscar') Buscar
+  // Header
+  header#home.w3-display-container.w3-content.w3-wide(style='max-width:1500px;')
+    img.w3-image(src='/w3images/architect.jpg' alt='Architecture' width='1500' height='800')
+    .w3-display-middle.w3-margin-top.w3-center
+      h1.w3-xxlarge.w3-text-white
+        span.w3-padding.w3-black.w3-opacity-min
+          b BR
+        span.w3-hide-small.w3-text-light-grey Architects
+  // Page content
+  .w3-content.w3-padding(style='max-width:1564px')
+    // Project Section
+    #restaurantes.w3-container.w3-padding-32
+      h3.w3-border-bottom.w3-border-light-grey.w3-padding-16 Restaurantes
+    .w3-row-padding
+    if registrations.length
+      - var n = 0;
+      - var n1 = 0;
+      - var n2 = 0;
+      while n < 4
+        .w3-col.l3.m6.w3-margin-bottom
+          .w3-display-container
+            .w3-display-topleft.w3-black.w3-padding 
+              //b= registrations[n1++].nombre
+              form(action=`/restaurantes/${registrations[n1++].nombre}` method = "GET")
+                button.w3-button(type='submit')
+                  i.fa.fa-paper-plane
+                   b= registrations[n2++].nombre
+            img(src=registrations[n++].imagen alt='Restaurante' style='width: 300px; height: 300px; object-fit: contain;')
+    .w3-row-padding
+    if registrations.length 
+      - var n = 4;
+      - var n1 = 4;
+      - var n2 = 4;
+      while n < 8
+        .w3-col.l3.m6.w3-margin-bottom
+          .w3-display-container
+            .w3-display-topleft.w3-black.w3-padding
+              //b= registrations[n1++].nombre
+              form(action=`/restaurantes/${registrations[n1++].nombre}` method = "GET")
+                button.w3-button(type='submit')
+                  i.fa.fa-paper-plane
+                   b= registrations[n2++].nombre
+            img(src=registrations[n++].imagen alt='Restaurante' style='width: 300px; height: 300px; object-fit: contain;')
+    // About Section
+    #descripcion.w3-container.w3-padding-32
+      h3.w3-border-bottom.w3-border-light-grey.w3-padding-16 Descripción
+      p
+        | En esta pagina, Stigmergy tiene la posibilidad de agregar y consultar los restaurantes que se encuentran
+        | inscritos en la plataforma. Al hacer click en la imagen, esta los va a redireccionar a un detalle de la
+        | misma. También pueden realizar funciones de agregar restaurantes a las bases de datos. Para obtener mayor
+        | información del funcionamiento de esta página, puede contactar a cualquiera de las siguientes personas.
+    .w3-row-padding.w3-grayscale
+      .w3-col.l3.m6.w3-margin-bottom
+        img(src='https://images.squarespace-cdn.com/content/v1/54ec0fb3e4b0dc5d50410043/1631914685305-REPKO37JXHBZFDVX9NEZ/fotografia-corporativa-retrato-empresarial-hombre.jpg?format=2500w' alt='John' style='width:310px; length:330px;')
+        h3 Carlos Silva
+        p.w3-opacity Desarrollador
+        p
+          | Desarrollador de la clase. Arquitectura y diseño de software
+        p
+          button.w3-button.w3-light-grey.w3-block Contact
+      .w3-col.l3.m6.w3-margin-bottom
+        img(src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUWFRgVFhYYGRgaGBgZHBwaGBoYGBoaGBgaGhkcGhocIS4lHB4rIRgYJjgmKy8xNTU1GiQ7QDs0Py40NTEBDAwMEA8QHxISHjQrISE0NDExNDQ0NzQ2NDQ0NDQ0NDQ2NDQ0NTQ0NDQ/NDQ0ND0xNDE0NDQ0NDQ0MTQ0NDE0Pf/AABEIAL8BCAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAABAgADBAUGBwj/xABAEAACAgADBQUFBQYGAgMBAAABAgARAxIhBDFBUXEFImGBkQYyobHwE8HR4fEHFUJigqIUI1JyksJTskNzgxf/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIDBAX/xAAkEQEBAQEAAgICAQUBAAAAAAAAARECITEDEkFhUQQTMnHBIv/aAAwDAQACEQMRAD8A8zWWKsgEsRZCURY58ICYVMqlBCBCFv7/AAkMCGKRJCFgACP0/WKfCEQJUIEcC+sB8ICEQER5AsCsCOPj9aRqqAiAtQVJgK+JeUUB/FxPSOuyMoJtjW83p0A3yL1Imc2kK11iVH15fH8oiPcmXS84hEYUN+/5RstdYhEIKwi3G6/pAwr6+MAGJcBMksGuEcz+sUD65w3ALSCFYcnHhw8YC1xMRjLDBUCoiGPk9JIFiJHBgEIlRKmRg7OGAOat96bgPoeoiYGFmOugG86ciePQx8TEsBR7o+euvMffvgDFZb7ooUB1rS/OVyVDUCCG+UFSCAQtmgLJ4D7hLMbZXQWyMo5kGpm9lbnI0YBNR7wQtTkeIEzcEg3ouWwDlYsCrMVIc2QTl797xUDQgySVCIAqHdDcggQa9ZBsq4hyFq0JrnUdVs0N50m67C7OrGDG7OGG4Ee/Q8t/Wr4C6ddZNW45+3WNbsxXB7p30DoCAvhXHfyuxx3RdqxC2rUd1+HIFuPkPuvvsT2cwsXVhTcxNJtXsk4aksiyRpWvOYzuW7XRfj6niOTKitd17wfvmNioVoqbPK+HhznSbf7P4mEvu8N9AgaVQ8pz2ImRGteg8efzmnPUvpn1zZ7FHseMtXZHYZlRiOYB+HOY3ZBUsFPu51vX+EkX8zOixn79EAtnYEFiGAzAIuGoOlqc11wM1Y1zraStjM/tj3wbs5TZ50zKrHxKhTNaxhAEyDmYL4/RgLSyTB+f10jVKwZlYGGKztoOG42bO8ctDpx8iQF6bOq95mBUUao94nWvDh6iY5PLd469IcbGLGz5dLNWeJ8YtwBCBCBJUqAWghqCWFssw0Fi93H64RAI4PpKi3FxP4F90cdbPXmL1lYEIWMogAYchEe+X6wERoWoMscCS63fX5RoXCxGQ2pII4iW421O/vMTV6aAa79BKiOMgEaAFhqo111kjQtRlWSow06/KNFyuqKCNWI1vh9aenjOs7Iw1RkDMcxREs3RY3iML/8A0A/pnGnX63zv8DYDj7KiuaYqhsaahAo+AEx+b1I3+D3a6fZk0luIeM0XYgxMMFGcuqixm1YVzPEfKDaPafZ1Yq7MDdXkYqTyBA1M5s/h0/7P2ri6GeXe1zgP3TROteH3Tutv7SR9EJPVSNPMTjn7GONjYj4pZVWiF7uZxVgizVfjNPi8dbVfl5t5yNTsiUoJ3kAn9Jlt2hiZcuc1VcLrlm3/ABgxasgG6JAPMDdMVzOtw0jmVsOf1+UdpWzXv+vygITJJCBxP6ywu2ZF1z8rHj0+uPhHxcYubPoNB1q5Qrc/0j1Kh1jBPT63QKI4PpABkqGpAIAKQw5uHD6+MkBvlGEUR1EBkjHw3RfrrCpiiCEQ1CZABMQxoIAEcjl5+EG6AGBKhkqHd1gNVQAQAwgwAZ6h2Rij7FLq6oX/AC6X8JxnYvs++NhY2Nww0YJ/NiBb9ACD5jxm7wMHuEakYfcrMQTR1J+fHfMPmvp0/wBPLtbDaMRlQvVZjXjUysPAR0BrQ16jcfAzSY95Aud1Aqg3u9A6mvu1mb+8gmC1qFIWwNwvd8TMfTsv7YHbCphoyYa94hiALY2b3DlfAR+39mL7MuIgGfIEdNQ1aBiAeNDdvrpF7N7dZ8VcPZsDMzWzPiNuAoXpd6kTqccvr9qivhkC8g7ynias35SfPN8s+sssleLu0Qnn5eM6L2r7D+xY4uGc+C2tj+Ek7jyF/hOWd52c9TqbHn9c3m5QdokJNyAc5dAKOJkMkMCKJcvjuiKsa5UWGQGBeUYLAIhLQEyQJJCBJAsAjXFvhDAIhBmz7NwwEDD3mdhmoMVCJmIUHTMZftIzoxa7AJGbLnUhQ47ygAqyncdQYGoU1BBJIBqG6i3IIBqOmCzCwOIG/iTQiLyEyGOQZdC2uo4afrp06QFxUCVRttbrUeFeUpmTsHZ+Ljvkw0Z248hfFmOijxM7zsf2Dw0ptpcu3+gEphg8r99/7R4GRbISWuA2TZXxGyYaM7clBNdeAHiZ2PY/sC7U2O+T+RKLebbgel9Z6JsmxphplREVR/CqhR6CZQS9JS9Lzlhdjdj4WAn2eGtKCSQSTZYakk7ya+E5Ltns87NjOST9niaoeF0AUY/6tBXMeIM73CQ5pj7cQ5GEyBkas1gFeYGU8NDrKWfZfnr615nibRhYJzMLBFgWTTeAPynM9r9p4uOx0Kpd7t/lwnc+1HZa7NiAYequubKdSutVmOpHXxmoGwl6yJd+QGl6tuA6zKX6315dF/8AU3fBvYBguFiuzVeIQT/FlRVFeHezTqdjZWs4DkEE5kayL42PvE0uzbOmGUwUXuKpzPpWISCzmhu7xB1PAibfYcFQ+caEijLdzzpx1LMaztY5lxEygMQyuB7jBl30dx1nkqKWIA3nSey9vYNHOOh8R9XPNNq7A2jDDY74f+WCzA6OCpsqzBSaXUXdVxqafBfcZf1HnK1Q2egWc0NQKNnMDW7lofTlKM1w4+KWPhwHISsTpcywR0EVPhDmgOTIDFudDgLkAVM3uoTkC53Z71LMCFQVUqhpAY+bSpndpoCqvxOXWgpZXXMpYDTMKINb9JrwYDQiKJLhJs3DhJEJkgWiNEWPm4fX6QMjZtrZAVoMpIJVt1jcRWoPjGxdsZhWirrou7UgmybJJoa+ExIQYDgw3AHrT68oDIBBhqKIwNQMpiE0Hvc+Q5V6Hr4b6MNCxCqLZiABzJNAepiVNr7LIG2vAB/8in/jbD4gQPWvZ7sJNnwVQCyNWO/M594/h4ATcfZg6Hjprr5G/kfjHwtBHYA7+PH6+Uxa4w0UqSp3EGvTd8D6HrMlG0U8wAfugZL37xp15H4fCDCHcHQfCQRkSEA8ImaG41ONN7TdjfbYTMi3jKO4bq6/hbw39PWanYuylRFUnMV8gW4kjl4dJ2eE2s1e1YVYrVuZQ3nuMST2j7X01gVVG4ZtdSOJBG7lrulK7KVXNmJI3iqFbtJk4qay7Z9+sWbE83LrV7ThZwc2og7Jw8+AVcWyMyEH/TvX+1h6GZuFgCmFbiR6GpiYGKE2kKdBioy/1p3l/tz/AAmfNytu5vLyP2u7LGBtDIopGAdBwo2Co6EHyImiC+k9E/ansorCxN1OyeTLm/6Tz3Nf19azs5uxx32UmNEjKJYNczsHtEhQrKr0KUtdgHhakWvgZhE39fPxgBgZWNtTv7x42AAABoBoB4ADygWVJrLM3D4/jKhyYCYtyCA+Fh5mC7rv5XDELDdwglhYGhuIIRKiy+EJ06xLrrCGgNcMWNddflAe66wXEhEgMGm79kBW27PfF/8AqZo7rrNn7MORtez+OMg9WA++L6I9+wwRCwBi4b6C/X8fxjtMGqhXpgDxNA89CR56S1VrTr85h7VYZGGlOlg7iGOXQ8CM1+UzyIFREkYiJCx8NtZTta/5i+Kkeh/OOh1EO0++n9Xy/KFPy1m1JqJQwozY7Um6a121kpPhoxZsqkgneASL46zD2rshi6u3dCMGGupYajdw53N72Wbw0I4qD5nf8bmTtGHYlfrN1b73MeQ/tWxbwsLl9rf9j/iZ5oJ6f+1TZiMJPDGB8ij/AHzy8Tp4/wAWPXs5NyZopaS5ZBwY28/Xxlawk8PowLQ3CMDKwb6xkMC5ZGbgP1lZbgP1guVBuGAQywsEYGvrdKw1SXKhyajKCdwJvQabzyERQTQAsncOMy/tcihbObU+Auwa4g7+t3yhAOuTQ1uB04X9/DylVyosTDcJWAxwalIaHNAe5n9hPW07P/8Afhf+6yjYMAPmZrKrlGUaFmc5VW+AvjNv2fgYf22HQQFcbD1RmOVg4yhg/vKSKzDjA91wDpCVHDT5ekrwDpGczBqxdrdgrDiQaPlwmXs+MHQMNxExcXEAFHUHh+E1vs/tVM2EAQqk5QTZFEirkDfNK2j5ojQKwdR1lu0+8n+4/FTKSO9Mjad6f7/+rQKdo3TRXYY+Q85vNsPdM0uBQFncLY9F1iDe7AtIoG5Rl/4mvulrtMDsDaRibPhuCGzoDakMLbVhfgSR5TNaSOH/AGkdktjbK5X3kp640mpA8azV4meHs4P18Z9N7SBke/8ASa6k0PjPnb2o7P8A8PtWLhj3c2ZOAyP3gB4Cyv8ATNfjv4Z9Rq4VEAkLcBNEH8B+sW4ssRGc6Amt5Auhus8/vhC3CwWZstVuskGgDxOmg8ZGPDiNOd1Ldp2veqk8mJIu1sVY0I434+mGpgXgwgyoGMGjDVljd8fu6QRLkg0+aOgsgDeZSDLEeuo3Hl4QhmghBzf/ANd/hrYP1rMbPe/1lTsSSTvuzIDKiyPddYitz8vCKTCdWXJcrDR1bn5fXKEsvYdqCZgwJVqujTAqbVlPMGZidrqjqygmmViWCqAFfPoF097vE+E0zGIxhD6b2Y6S1hNJ7Jbd9rsuBiHe2Gmb/cBlb+4GbtlB+qMwraMHaRNEjFMckaWwPqAT8bnQ7UoAOpPoZz+0bM+ctRKmuVjKB469R4+YdVhtYEDTA2DbBlAO+Z2YGQEcd765y7aP4f8Ad/1aVuO8D4feJbtH8P8AuEFYu2t3b5Gc723i5NmxObAoP6t/wudDtIzKRzE4j2z2rKiJ/JfUtoPrxhMjb/szYf4FQCTT4t3wJdjQ8KIPmZ1DtvnIfs7RsPZqNWcRyRfu5iCAfGq9Z1OI/wBb5NvnwZnth7c/drxs+W74n4Tx/wDahhD7TAcDUo6k+CMhF/8ANvWeu7XuM8j/AGp4nfwEG9UdyOPfZQPgnzl+PanXpwpbgP1kuJCJsyXYOEz6LL8bGVRkQ6cWognfoQRoda+jMdcQ65TVij/MJVcJWjXr8/zkWViW3w4/P6+PzAkiEGVgwgwg5MMBPDj9adfGGBLrr8vzguJclwLlaNdb9/ylIauvyjB73+v4xge5LlZMINSMFoNSF5VmkuMFn2nCTr+v5RBzP6wZ+f6dIwewfsl7Rz7M+Ed+HiGv9j98f3Z/SeghjV8Pify+uvhv7M+0xg7ZkY0uMmT+tTmT4Zh1YT29H0Ex7mVtzdiZNw/qb7h0/CVIuazzOnTh+PnHc6Vz39OUV2/hHmeQ5dZRKgYQOvjp0GkNMNxl2YVELiSJ9o269eHjpdSw7QzAbufp+spLyzBO/wBfWvvBgUbViuEZkUFlBIB41rXWcFt+Mcd1dqXKNFrpqDe+hPR3IAY8ACSeguefYLqwUtQGhq7mfdv4bfDJ5tZ3s3inDxMjGlxBQ5ZxZHQkZh46CdaG4TisbasOipqq05g8CPGc5/8A0hsF8hU4wUkFryMK56Ux4cOst8ctmI+bJdenbbiAA3PCPbXtIY+2YjK1qtIp55d5H9RabD2i9vcbaFK4a/ZqdGN22vIj3evynGrynRxznmubrrfRxITwH6xS3AfrJcuoIj1fX5ysRrrd6/hAa+XrADJV9fnIsCzfCTXWC66/KITAJMkUmSAQZYNOsrGnX5QXJw1ZmkuZewbDnGZiwXNlUKLZ2q6W9BQ1s6S3bOzQqlkzggZir5SStgFlZDlNEixvFxhrCVhx8vz8IpMS5LjDT3Ivju+vhFBkJuMNMxMFwXMrZsoQlqoncRZOXUgHzArjfmGI1VhsyZX1GuZGG8Mp0I5UR8J7J2N+0TZcTCU4rjDxABmUghb4lG3EHfW8cZ4ztG0M5s7uXAfn4yiV65+3tadY+hdl7fTFTPhW6EkBlFixvly9qLxzj+j85qfY/Z0TYsAJuKK5PNnGZz6k6cKnQpgIddJhecrWdSscdopzf0A++MNtU8G+H4zPTATdQhbZU3gAeNCuvMRlTsa8bWvC/mfQS/Bx3PuoT10l5cDQgDxEfZ8Sifq4ymxhY+NiOjpky5g6bxYu1J+c589i4YFFSf6jOox31Pjr9fGa7G6yPqfaRqRsaJ7qAeWvrPIvbfYlwtrcLucB65Fic3xBPnPZsbEUbyPWeZ+36qdpwSD3shzAgkBAxKn+be+g10mvEyqdXY4rCVjeUXQJPTj13yEitN3H65TJ2jHoZV0GpJHEnUgEcOHlXicGpqzPCIgBjnTQeZ+4eEBrrQeZ+4SCVibjZeygQC+csyhsqZRlU7i7OaF8ow1rQZZfrx/LxmRt+xZKIJKkle8KZWAsqwGm4ggjQiYYMYaMBMknzjDUHx4fXOSVkSQPXOwuyRjZmcsFVgoAKqzMwZqs6KqqpZiQdBoDLu2ex8NMMY2E1rYDDOMRaYkAq4VSQGGUqyggkcDMXsftf7HMCpZGK6BspVlsAqSCNzMCCCGBox+1e3GxU+zAypYOptiQCdWAA17ugUAZFA3a+tee/wC5v4eHOvj+mX3/ANVDsfEyBqGYkd0sgpThtiZ3YtS91bpqNEHiJWOycakOSg4JUl0ApUDktbd0ZSGtq0IMbE7XxSoUlaysppFBYFMlsR7zBDQJ/GN++MSlsISgyAlASy5SmR+DLRryB3i5fO/0pvx/tMLsXaGLAILVipzOi6jLdZmGYd9NRY768xK9l7MxH3BV72IvfZU72GpdxRN6AamqBIsiH974vMbiPdHFcJflgJ6HnI3auIWV+5YLmsgyscXR8w/izDum+AEZ3+kb8f7HD7JxGyhAGYlho2Hl7pRdHz5Ws4ijqQBd6T9z49sMnurmamQjKVZrVs1NojmlJPdPIwntjGu7W82b3QBedMTQDcLwk05Cov72xMrKcpVkCEFRuGYgjkwzNr4xnf6Tvx/sMHsnHdVZUsN7veQGu93iC1qvcbvGh3TrLl7A2g3/AJYFXvfDXdlsi31Xvp3hp3hrrAO28QZe7h93NX+WpORs14dn/wCPvsK5HwEOL27jHQ5KystBAAFP2fdAG4D7FAPASLPk3xiZ/bzzrXY2GysysKZWKsDvBU0R6iLLdpxmd3c1bMzNWgtiSaHUyqaSfyyt8+AqSoZJORG0KkqGSMh5CpKhkjIbQqSoZIyG0IZJIyG1JJJIw2pJJJGG1dg7I7qzqtqt2bAqhZ0Js6a6S3924v8Ao0oteZKoKrE3mqqdT5+BlKYzqpUMwVrsBiAb32Bvjf43Eu/tMSzvOdrOgHPkF9BykWX8YtLM86yP3LtG77JuW9eZHP8AlP0RKf8AAYmhyjUgCnQ6lc4ujp3ddYF2/FGoxHHR2HEnnzJPnFG04gqnfQgjvHQhcoI13hRXTSRJ1+cLefxq5ezMYrnGGxWyNKJsMVOgN7wRu4RW7Oxhvwn3A+4eNem8esrw9pxFNh3B3WGIO8nnzYnzMcbfjf8AlxP+bfjGdfo3n9q9o2Z0IDqVJGYA76JIv1B9JImJjFqzMWoULJNAbgL4an1kk4jY/9k=' alt='Jane' style='width:310px; length:330px;')
+        h3 Camilo Falla
+        p.w3-opacity Desarrollador
+        p
+          | Desarrollador de la clase. Arquitectura y diseño de software
+        p
+          button.w3-button.w3-light-grey.w3-block Contact
+      .w3-col.l3.m6.w3-margin-bottom
+        img(src='https://mott.pe/noticias/wp-content/uploads/2019/04/8-consejos-para-realizar-fotografias-de-retratos-corporativos-1280x720.png' alt='Mike' style='width:310px; length:380px;')
+        h3 Sara Calle
+        p.w3-opacity Desarrolladora
+        p
+          |Desarrolladora de la clase. Arquitectura y diseño de software
+        p
+          button.w3-button.w3-light-grey.w3-block Contact
+      .w3-col.l3.m6.w3-margin-bottom
+        img(src='https://www.sistemaimpulsa.com/blog/wp-content/uploads/2019/01/1483371907000-e1525901319539-300x169.jpg' alt='Dan' style='width:310px; length:380px;')
+        h3 Juliana Velasco
+        p.w3-opacity Desarrolladora
+        p
+          | Desarrolladora de la clase. Arquitectura y diseño de software
+        p
+          button.w3-button.w3-light-grey.w3-block Contact
+    // Contact Section
+    #inscripcion.w3-container.w3-padding-32
+      h3.w3-border-bottom.w3-border-light-grey.w3-padding-16 Inscripción
+      p Inscribe un restaurante
+      form(action='.' method="POST")
+        input.w3-input.w3-border(type='text' id="nombre" placeholder='Nombre' required='' name='nombre')
+        input.w3-input.w3-section.w3-border(type='text' id="tipoComida" name="tipoComida" placeholder='Tipo de Comida' required='' )
+        input.w3-input.w3-section.w3-border(type='text' id="imagen" name="imagen" placeholder='URL de la imagen' required='')
+        button.w3-button.w3-black.w3-section(type='submit')
+          i.fa.fa-paper-plane
+          |  Inscribir restaurante
+    // Busqueda
+    #buscar.w3-container.w3-padding-32
+      h3.w3-border-bottom.w3-border-light-grey.w3-padding-16 Buscar
+      p Busca un restaurante por su nombre
+      form(action=action=`/restaurantesNombre` method="GET")
+        input.w3-input.w3-border(type='text' id="nombre" placeholder='Nombre' required='' name='nombre')
+        button.w3-button.w3-black.w3-section(type='submit')
+          i.fa.fa-paper-plane
+          |  Buscar restaurante
+    .w3-container.w3-padding-32.w3-center
+      h3 Acerca de Stygmergy
+      br
+      img.w3-image(src='https://stigmergy.com.co/images/StigmergyLogo_1.png' alt='Me' style='display:block;margin:auto' width='500' height='533')
+      .w3-padding-32
+        h4
+          b &iquest;Que es Stygmergy?
+        h6
+          i Entregando lo que necesites a trav&eacute;s de drones aut&oacute;nomos.
+        p
+          | Estamos construyendo una red log&iacute;stica de centros en ciudades, suburbios y &aacute;reas sin cobertura de servicios de entrega tradicionales, lo que permite que cualquier paquete llegue a donde antes era dif&iacute;cil llegar.
+        hr
+
+    
+    // End page content
+  // Footer
+  footer.w3-center.w3-black.w3-padding-16
+    p
+      | Powered by 
+      a.w3-hover-text-green(href='https://www.google.com' title='W3.CSS' target='_blank') ARQUISOFT G-5
