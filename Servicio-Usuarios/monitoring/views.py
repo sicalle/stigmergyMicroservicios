@@ -9,14 +9,6 @@ from django.contrib.auth import logout
 def home1(request):
     return HttpResponse("Welcome to my web site")
 
-def home(request):
-    now = datetime.now()
-
-    html_content = "<html><head><title>Hello, Django</title></head><body>"
-    html_content += "<strong>Hello Django!</strong> on " + now.strftime("%A, %d %B, %Y at %X")
-    html_content += "</body></html>"
-
-    return HttpResponse(html_content)
 
 def logout_view(request):
     logout(request)
